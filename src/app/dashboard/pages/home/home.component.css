@@ -1,0 +1,13 @@
+
+
+
+
+.btn-group-sm>.btn, .btn-sm {
+    padding: .1rem .30rem;
+    font-size: .675rem;
+    border-radius: .5rem;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 2px 2px;
+}
