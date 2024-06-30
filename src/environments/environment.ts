@@ -9,7 +9,7 @@ const localIP = IpService
 
 export const environment = {
   production: true,
-  BASEURL: `${localIP}:5000`
+  BASEURL: `http://104.234.200.32:5000`
 };
 
 /*

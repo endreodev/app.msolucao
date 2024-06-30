@@ -101,17 +101,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/css/animate.css",
-              "src/assets/css/paddle.css",
-              "src/assets/css/sweetalert2.min.css",
-              "src/assets/css/notyf.min.css",
-              "src/assets/css/main.min.css",
-              "src/assets/css/apexcharts.css",
-              "src/assets/css/dropzone.min.css",
-              "src/assets/css/choices.min.css",
-              "src/assets/css/leaflet.css",
-              "src/assets/css/volt.css"
+              "src/styles.css"
             ],
             "scripts": []
           }
