@@ -1,5 +1,6 @@
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -18,7 +19,7 @@ import { ParceiroComponent } from './component/parceiro/parceiro.component';
 import { LoadingComponent } from './component/loading/loading.component'; 
 import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
-import { ambiente } from '../environments/environment';
+import { ambiente, environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
@@ -45,7 +46,8 @@ registerLocaleData(pt);
     AppRoutingModule,
     DashboardModule,
     AngularFireModule.initializeApp(ambiente.firebase),
-    AngularFireMessagingModule
+    AngularFireMessagingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AuthService,PainelGuard,

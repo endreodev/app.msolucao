@@ -1,12 +1,15 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+
+import { IpService } from "../app/service/ip.service";
+
 // The list of file replacements can be found in `angular.json`.
+const localIP = IpService
+
 
 export const environment = {
-  production: false,
-  // BASEURL: "http://localhost:5000"
-  // BASEURL: "http://10.0.0.176:5000"
-  BASEURL: "http://104.234.200.32:5000"
+  production: true,
+  BASEURL: `${localIP}:5000`
 };
 
 /*

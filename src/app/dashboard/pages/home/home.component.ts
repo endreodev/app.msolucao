@@ -3,11 +3,11 @@ import { Subscription } from 'rxjs';
 import { Qout } from './interface/qout';
 import { environment } from '../../../../environments/environment';
 import { ParceiroSharedService } from '../cadastros/parceiro/service/parceiro.shared.service';
-import { TravaService } from './service/trava.service';
-import Swal from 'sweetalert2'
+import { TravaService } from './service/trava.service'; 
 import { ActivatedRoute } from '@angular/router';
 import { Travas } from './interface/trava';
 import { ParceiroService } from '../cadastros/parceiro/service/parceiro.service';
+import { AlertService } from '../../../service/alert.component';
 declare var $: any;
 
 @Component({
@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
   constructor(
     private travaService: TravaService,
     private router: ActivatedRoute,
+    private m: AlertService,
     private ngZone: NgZone,
     private parceiroShare: ParceiroSharedService,
     private httpParceiro: ParceiroService
@@ -203,11 +204,13 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
     };
 
     this.travaService.postTrava(requestBody).subscribe( (response: any)=>{
-      Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
+      // Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
+      this.m.alertsucess(response.message);
       this.gramas = 0;
       this.atualizartabela(1);
     }, (error: any)=>{
-      Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
+      // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
+      this.m.alerterror(error.error.message);
     });  
     
   }
@@ -215,11 +218,13 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
 
   encerraOrderm(id: number){
     this.travaService.getTravaEncerrar(id).subscribe( (response: any)=>{
-      Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
+      // Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
+      this.m.alertsucess(response.message);
       this.gramas = 0;
       this.atualizartabela(1);
     }, (error: any)=>{
-      Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
+      this.m.alerterror(error.error.message);
+      // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
     });
   }
 }
