@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build && node set-base-href.js /app.msolucao/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
