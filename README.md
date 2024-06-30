@@ -4,6 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 npm install datatables.net-bs5 datatables.net-dt jquery --save
 
+Alterado -- Endreo
 
 ## Development server
 
