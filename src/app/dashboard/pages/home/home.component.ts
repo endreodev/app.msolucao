@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
 
   gramas: number = 0;
   cotationPrice: number = 0;
+  cotationReal: number = 0;
   subscription: Subscription = new Subscription();
   idParceiro: string = "";
   eventSource?: EventSource;
@@ -94,6 +95,7 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
         this.exibirProgressBar = true;
         const data: Qout = JSON.parse(event.data);
         this.cotationPrice = data.negociado || 0;
+        this.cotationReal  = data.valor_grama_real || 0;
       });
     };
 
@@ -200,7 +202,8 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
       parceiro_id: this.idParceiro, 
       quantidade: this.gramas, 
       preco_unitario: this.cotationPrice,  
-      preco_total: this.valorTotal 
+      preco_total: this.valorTotal,
+      cotacao: this.cotationReal
     };
 
     this.travaService.postTrava(requestBody).subscribe( (response: any)=>{
