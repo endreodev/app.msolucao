@@ -37,25 +37,4 @@ export class PerfilUsuarioComponent {
     });
   }
 
-  // updatePassword(oldPassword: string, newPassword: string) {
-  //   const url = '/api/change-password';
-  //   this.http.post(url, { old_password: oldPassword, new_password: newPassword })
-  //     .subscribe({
-  //       next: (response) => {
-  //         Swal.fire({
-  //           icon: 'success',
-  //           title: 'Senha Atualizada',
-  //           text: 'Sua senha foi atualizada com sucesso!'
-  //         });
-  //       },
-  //       error: (error) => {
-  //         Swal.fire({
-  //           icon: 'error',
-  //           title: 'Erro',
-  //           text: 'Não foi possível atualizar a senha. Por favor, tente novamente.'
-  //         });
-  //       }
-  //     });
-  // }
-  // }
 }
