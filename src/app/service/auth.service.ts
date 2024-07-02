@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs'; 
 import { environment } from '../../environments/environment';
 import { AlertService } from './alert.component';
+import Swal from 'sweetalert2';
 
 
 @Injectable({
@@ -18,6 +19,26 @@ export class AuthService {
     private router: Router,
     private m: AlertService
   ) { }
+
+  updatePassword(newPassword: string){
+    this.http.post(`${environment.BASEURL}/change-password`, { new_password: newPassword })
+      .subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Senha Atualizada',
+            text: 'Sua senha foi atualizada com sucesso!'
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Não foi possível atualizar a senha. Por favor, tente novamente.'
+          });
+        }
+      });
+  }
 
   login(body: any) {
 
