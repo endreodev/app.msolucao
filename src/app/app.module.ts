@@ -21,8 +21,9 @@ import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 import { ambiente, environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
-
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging'; 
+import { IConfig, provideEnvironmentNgxMask } from 'ngx-mask'
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 registerLocaleData(pt);
 
@@ -47,13 +48,14 @@ registerLocaleData(pt);
     DashboardModule,
     AngularFireModule.initializeApp(ambiente.firebase),
     AngularFireMessagingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     AuthService,PainelGuard,
     { provide: LOCALE_ID, useValue: 'pt' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptorService, multi: true },
+    provideNgxMask(),
   ],
   bootstrap: [AppComponent]
 })

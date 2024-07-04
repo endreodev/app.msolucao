@@ -16,6 +16,8 @@ import { UsuarioAdicionarComponent } from './pages/cadastros/usuario/usuario-adi
 import { UsuarioEditarComponent } from './pages/cadastros/usuario/usuario-editar/usuario-editar.component';
 import { LancamentoLimiteComponent } from './pages/cadastros/lancamento-limite/lancamento-limite.component';  
 
+import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { LancamentoLimiteComponent } from './pages/cadastros/lancamento-limite/l
     FormsModule,
     DashboardRoutingModule, 
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskDirective ,
+    NgxMaskPipe,
   ]
 })
 export class DashboardModule { }

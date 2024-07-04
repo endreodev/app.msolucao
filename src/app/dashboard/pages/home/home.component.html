@@ -102,7 +102,14 @@
 
                         <div class="col-sm-6">
                             <label for="gramas">Quantidade (g)</label>
-                            <input type="number" class="form-control" id="gramas" name="gramas" [(ngModel)]="gramas" required>
+                            <input  type="text" 
+                                    class="form-control" 
+                                    id="gramas" 
+                                    name="gramas" 
+                                    [(ngModel)]="gramas" 
+                                    mask="separator.2" thousandSeparator="."
+                                    (focus)="clearField()" 
+                                    required>
                         </div>
                     
                         <button class="btn btn-sm btn-info col-6 mt-4" type="button" *ngIf="exibirProgressBar" (click)="realizarOrdemTrava()">Vender</button>

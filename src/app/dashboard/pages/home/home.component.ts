@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
   limiteParceiro: number=0;
   percentual:number=0;
 
-  gramas: number = 0;
+  gramas?: any = 0;
   cotationPrice: number = 0;
   cotationReal: number = 0;
   subscription: Subscription = new Subscription();
@@ -230,4 +230,10 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
       // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
     });
   }
+
+
+  clearField() {
+    this.gramas = null; // ou "" se você estiver usando string
+  }
+
 }
