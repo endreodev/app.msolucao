@@ -17,6 +17,7 @@ import { UsuarioEditarComponent } from './pages/cadastros/usuario/usuario-editar
 import { LancamentoLimiteComponent } from './pages/cadastros/lancamento-limite/lancamento-limite.component';  
 
 import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
+import { NumberFormatBRPipe } from '../service/diretivas/numberFormatBR';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMas
     UsuarioAdicionarComponent,
     UsuarioEditarComponent,
     LancamentoLimiteComponent, 
+    NumberFormatBRPipe
   ],
   imports: [
     CommonModule,

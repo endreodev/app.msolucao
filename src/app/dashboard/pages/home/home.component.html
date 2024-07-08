@@ -7,9 +7,9 @@
                     <!-- <div class="col-12 col-xxl-6 px-xxl-0 mb-3 mb-xxl-0">
                         <div id="chart-customers"></div>
                     </div> -->
-                    <div class="col-12 col-xxl-6 ps-xxl-4 pe-xxl-0">
-                        <h2 class="fs-6 fw-normal mb-1 text-gray-400">Total Vendas {{stringTrava}}</h2>
-                        <h1 class="fw-extrabold mb-1">{{quantidadeTrava}} (g) </h1>
+                    <div class="col-12 col-xxl-12 ps-xxl-4 pe-xxl-0">
+                        <h2 class="fs-6 fw-normal mb-1 text-gray-300">Total Vendas {{stringTrava}}</h2>
+                        <h1 class="fw-extrabold mb-1">{{quantidadeTrava | currency:'BRL':'symbol':'1.2-2'}} (g) </h1>
                         <br>
                         <small class="d-flex align-items-center">
                             <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20"
@@ -18,7 +18,7 @@
                                     d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            Limite Mês: {{limiteParceiro}} (g)
+                            Limite Mês: {{limiteParceiro | currency:'BRL':'symbol':'1.2-2'}} (g)
                         </small>
                         <div class="small d-flex mt-1">
                             <div>
@@ -160,14 +160,14 @@
                                     <th class="fw-bolder text-gray-500">
                                         <img src="../../../assets/img/gold.jpg" alt="" height="30px" width="30px">
                                     </th>
-                                    <th class="fw-bolder text-gray-500">{{iten.id}}</th>
-                                    <th class="fw-bolder text-gray-500" *ngIf="interno">{{iten.parceiro_nome}}</th>
-                                    <th class="fw-bolder text-gray-500">{{iten.usuario_nome}}</th>
-                                    <th class="fw-bolder text-gray-500">{{iten.produto_id}}</th>
-                                    <th class="fw-bolder text-gray-500">{{iten.created_at}}</th>
-                                    <td class="fw-bolder text-gray-500">{{iten.quantidade}}</td>
-                                    <td class="fw-bolder text-gray-500">{{iten.preco_unitario  | currency:'BRL':'symbol':'1.2-2' }}</td>
-                                    <td class="fw-bolder text-gray-500">{{iten.preco_total | currency:'BRL':'symbol':'1.2-2' }}</td>
+                                    <th class="fw-bolder text-gray-500">{{  iten.id }}</th>
+                                    <th class="fw-bolder text-gray-500" *ngIf="interno">{{  iten.parceiro_nome    }}</th>
+                                    <th class="fw-bolder text-gray-500">{{ iten.usuario_nome    }}</th>
+                                    <th class="fw-bolder text-gray-500">{{ iten.produto_id  }}</th>
+                                    <th class="fw-bolder text-gray-500">{{ iten.created_at  }}</th>
+                                    <td class="fw-bolder text-gray-500">{{ iten.quantidade | numberFormatBR }}</td>
+                                    <td class="fw-bolder text-gray-500">{{ iten.preco_unitario | currency:'BRL':'symbol':'1.2-2' }}</td>
+                                    <td class="fw-bolder text-gray-500">{{ iten.preco_total | currency:'BRL':'symbol':'1.2-2' }}</td>
                                     <td class="fw-bolder text-gray-500">
                                         <button class="btn btn-sm {{iten.status == 'A' ? 'bg-warning' : iten.status == 'C' ? 'bg-danger' : 'bg-success'}}" >
                                             {{iten.status == 'A' ? 'Aberto' : iten.status == 'C' ? 'Cancelado' : 'Finalizado'}}
