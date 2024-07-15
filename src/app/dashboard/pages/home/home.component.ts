@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Travas } from './interface/trava';
 import { ParceiroService } from '../cadastros/parceiro/service/parceiro.service';
 import { AlertService } from '../../../service/alert.component';
+import Swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -64,10 +65,12 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
   }
 
   buscarDadosParceiro(){
-    this.httpParceiro.getId(this.idParceiro).subscribe( (responde: any) => {
-      this.limiteParceiro = responde.lmt_mes
-      this.percentual = ( this.quantidadeTrava/this.limiteParceiro ) ;
-    })
+    if(this.isValid(this.idParceiro)){
+      this.httpParceiro.getId(this.idParceiro).subscribe( (responde: any) => {
+        this.limiteParceiro = responde.lmt_mes
+        this.percentual = ( this.quantidadeTrava/this.limiteParceiro ) ;
+      })
+    }
   }
 
   atualizartabela(page: any = 1){
@@ -76,6 +79,10 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
     }else{
       this.atualizalistaTravas(page);
     }
+  }
+
+  isValid(value: any): boolean {
+    return value !== undefined && value !== null && value !== 0 && value !== '';
   }
 
   ngOnDestroy(): void {
@@ -230,6 +237,36 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
       // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
     });
   }
+
+
+  cancelarOrderm(id: number){
+
+    Swal.fire({
+      title: 'Você tem certeza do cancelamento ?',
+      text: 'Esta ação não poderá ser desfeita!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, finalizar!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // this.encerraOrderm(id);
+        alert("ordem excluida")
+      }
+    });
+    // this.travaService.getTravaEncerrar(id).subscribe( (response: any)=>{
+    //   // Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
+    //   this.m.alertsucess(response.message);
+    //   this.gramas = 0;
+    //   this.atualizartabela(1);
+    // }, (error: any)=>{
+    //   this.m.alerterror(error.error.message);
+    //   // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
+    // });
+  }
+
 
 
   clearField() {

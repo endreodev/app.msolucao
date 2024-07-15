@@ -48,7 +48,7 @@ registerLocaleData(pt);
     DashboardModule,
     AngularFireModule.initializeApp(ambiente.firebase),
     AngularFireMessagingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    // ServiceWorkerModule.register('ngsw-config.json', { enabled: ambiente.production }),
   ],
   providers: [
     AuthService,PainelGuard,

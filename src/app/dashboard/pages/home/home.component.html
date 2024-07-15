@@ -8,7 +8,7 @@
                         <div id="chart-customers"></div>
                     </div> -->
                     <div class="col-12 col-xxl-12 ps-xxl-4 pe-xxl-0">
-                        <h2 class="fs-6 fw-normal mb-1 text-gray-300">Total Vendas {{stringTrava}}</h2>
+                        <h2 class="fs-6 fw-normal mb-1 text-gray-200">Total Vendas {{stringTrava}}</h2>
                         <h1 class="fw-extrabold mb-1">{{quantidadeTrava | currency:'BRL':'symbol':'1.2-2'}} (g) </h1>
                         <br>
                         <small class="d-flex align-items-center">
@@ -174,8 +174,12 @@
                                         </button>
                                     </td>
                                     <td class="fw-bolder text-gray-500" *ngIf="interno">
-                                        <button *ngIf="iten.status == 'A'" class="btn bg-success" (click)="encerraOrderm(iten.id)">
+                                        <button *ngIf="iten.status == 'A'" class="btn btn-md bg-success mb-1 p-2" (click)="encerraOrderm(iten.id)">
                                             Finalizar
+                                        </button>
+                                        &nbsp;
+                                        <button *ngIf="iten.status != 'A' and interno" class="btn btn-md bg-warning mb-1 p-2" (click)="cancelarOrderm(iten.id)">
+                                            Cancelar
                                         </button>
                                     </td>
                                 </tr>

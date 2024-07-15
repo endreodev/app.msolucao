@@ -68,7 +68,40 @@
 
                             <div class="col-sm-12 col-md-3">
                                 <div class="mb-3">
-                                  <label for="Telegran" class="form-label">Id Integração com Telegran</label>
+                                  <label for="Telegran" class="form-label">Hora Inicio</label>
+                                  <input type="text" class="form-control" id="tokenbot" formControlName="hrinicio" mask="00:00" placeholder="HH:MM">
+                                  <!-- <div *ngIf="empresaForm.get('nome')?.invalid && empresaForm.get('nome')?.touched">
+                                      <div class="text-danger" *ngIf="empresaForm.get('nome')?.hasError('required')">NOME é obrigatório.</div>
+                                      <div class="text-danger" *ngIf="empresaForm.get('nome')?.hasError('pattern')">NOME deve ter 14 dígitos numéricos.</div>
+                                  </div> -->
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                  <label for="Telegran" class="form-label">Hora Final</label>
+                                  <input type="text" class="form-control" id="tokenbot" formControlName="hrfinal" mask="00:00" placeholder="HH:MM">
+                                  <!-- <div *ngIf="empresaForm.get('nome')?.invalid && empresaForm.get('nome')?.touched">
+                                      <div class="text-danger" *ngIf="empresaForm.get('nome')?.hasError('required')">NOME é obrigatório.</div>
+                                      <div class="text-danger" *ngIf="empresaForm.get('nome')?.hasError('pattern')">NOME deve ter 14 dígitos numéricos.</div>
+                                  </div> -->
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                  <label for="Telegran" class="form-label">Token bot Telegran</label>
+                                  <input type="text" class="form-control" id="tokenbot" formControlName="tokenbot" placeholder="Digite o nome da empresa">
+                                  <!-- <div *ngIf="empresaForm.get('nome')?.invalid && empresaForm.get('nome')?.touched">
+                                      <div class="text-danger" *ngIf="empresaForm.get('nome')?.hasError('required')">NOME é obrigatório.</div>
+                                      <div class="text-danger" *ngIf="empresaForm.get('nome')?.hasError('pattern')">NOME deve ter 14 dígitos numéricos.</div>
+                                  </div> -->
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                  <label for="Telegran" class="form-label">Id Chat Telegran</label>
                                   <input type="text" class="form-control" id="telegran" formControlName="telegran" placeholder="Digite o nome da empresa">
                                   <!-- <div *ngIf="empresaForm.get('nome')?.invalid && empresaForm.get('nome')?.touched">
                                       <div class="text-danger" *ngIf="empresaForm.get('nome')?.hasError('required')">NOME é obrigatório.</div>

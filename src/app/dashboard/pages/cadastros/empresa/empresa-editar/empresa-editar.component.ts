@@ -28,6 +28,9 @@ export class EmpresaEditarComponent {
       cgc: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(18)]),
       empresa: new FormControl('', [Validators.required, Validators.minLength(3)]),
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      hrinicio: new FormControl(''),
+      hrfinal: new FormControl(''),
+      tokenbot: new FormControl(''),
       telegran: new FormControl(''),
       valsaldo: new FormControl(true),
       ativo: new FormControl(true)
@@ -47,6 +50,9 @@ export class EmpresaEditarComponent {
         cgc: response.cgc,
         empresa: response.empresa,
         nome: response.nome,
+        hrinicio: response.hrinicio,
+        hrfinal: response.hrfinal,
+        tokenbot: response.tokenbot,
         telegran: response.telegran,
         valsaldo: response.valsaldo,
         ativo: response.ativo

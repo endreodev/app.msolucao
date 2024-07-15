@@ -5,6 +5,9 @@ export interface Empresa {
     empresa?: string | null;    
     nome: string;       
     valsaldo: boolean;
+    hrfinal: string;
+    hrinicio: string;
+    tokenbot: string;
     telegran: string;
     ativo: boolean;     
   }
