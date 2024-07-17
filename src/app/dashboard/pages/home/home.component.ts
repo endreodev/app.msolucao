@@ -253,18 +253,18 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // this.encerraOrderm(id);
-        alert("ordem excluida")
+        this.travaService.getTravaCancelar(id).subscribe( (response: any)=>{
+          // Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
+          this.m.alertsucess(response.message);
+          this.gramas = 0;
+          this.atualizartabela(1);
+        }, (error: any)=>{
+          this.m.alerterror(error.error.message);
+          // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
+        });
       }
     });
-    // this.travaService.getTravaEncerrar(id).subscribe( (response: any)=>{
-    //   // Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
-    //   this.m.alertsucess(response.message);
-    //   this.gramas = 0;
-    //   this.atualizartabela(1);
-    // }, (error: any)=>{
-    //   this.m.alerterror(error.error.message);
-    //   // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
-    // });
+
   }
 
 

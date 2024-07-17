@@ -31,4 +31,10 @@ export class TravaService {
     return this.http.get<any[]>(`${environment.BASEURL}/trava/encerrar/${id}`);
   }
 
+
+  getTravaCancelar(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.BASEURL}/trava/cancelar/${id}`);
+  }
+
+
 }

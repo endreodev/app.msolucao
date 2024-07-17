@@ -178,7 +178,7 @@
                                             Finalizar
                                         </button>
                                         &nbsp;
-                                        <button *ngIf="iten.status != 'A' and interno" class="btn btn-md bg-warning mb-1 p-2" (click)="cancelarOrderm(iten.id)">
+                                        <button *ngIf="iten.status == 'A' && interno" class="btn btn-md bg-warning mb-1 p-2" (click)="cancelarOrderm(iten.id)">
                                             Cancelar
                                         </button>
                                     </td>
