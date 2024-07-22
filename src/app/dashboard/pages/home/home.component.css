@@ -9,5 +9,12 @@
 }
 
 table.dataTable tbody th, table.dataTable tbody td {
-    padding: 2px 2px;
+    /* padding: 2px 2px; */
+}
+
+.table th {
+    font-weight: 500;
+    /* padding: 0.5px; */
+    padding-top: 0.3px;
+    padding-bottom: 0.3px;
 }

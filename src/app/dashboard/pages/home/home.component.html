@@ -8,8 +8,8 @@
                         <div id="chart-customers"></div>
                     </div> -->
                     <div class="col-12 col-xxl-12 ps-xxl-4 pe-xxl-0">
-                        <h2 class="fs-6 fw-normal mb-1 text-gray-200">Total Vendas {{stringTrava}}</h2>
-                        <h1 class="fw-extrabold mb-1">{{quantidadeTrava | currency:'BRL':'symbol':'1.2-2'}} (g) </h1>
+                        <h2 class="fs-6 fw-normal mb-1 text-gray-900">Total Vendas {{stringTrava}}</h2>
+                        <h2 class="fw-extrabold mb-1">{{quantidadeTrava | currency:'BRL':'symbol':'1.2-2'}} (g) </h2>
                         <br>
                         <small class="d-flex align-items-center">
                             <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20"
@@ -43,7 +43,7 @@
                 <div class="row d-block d-xxl-flex align-items-center">
 
                     <div class="col-12 col-xxl-12 ps-xxl-4 pe-xl-0">
-                        <h2 class="fs-6 fw-normal mb-1 text-gray-400">Cotação Atual - OURO</h2>
+                        <h2 class="fs-6 fw-normal mb-1 text-gray-900">Cotação Atual - OURO</h2>
                         <h3 class="fw-extrabold mb-1">{{ this.cotationPrice | currency:'BRL':'symbol':'1.2-2' }} (g)</h3>
                         <br><br><br>
                         <!-- <h3 class="fw-extrabold mb-1">R$ {{ resultadosObserver | async }} (g)</h3> -->
@@ -86,14 +86,14 @@
                 <div class="row d-block d-sm-flex d-xl-block d-xxl-flex align-items-center">
                     <div class="row col-sm-12">
                         <div class="col-sm-6">
-                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">Cotação</h2>
+                            <h2 class="fs-6 fw-normal mb-1 text-gray-900">Cotação</h2>
                             <p class="fw-extrabold mb-1" style="font-size: 17pt;">
                                 {{ this.cotationPrice | currency:'BRL':'symbol':'1.2-2' }} (g)
                             </p>
                         </div>
 
                         <div class="col-sm-6">
-                            <h2 class="fs-6 fw-normal mb-1 text-gray-400">Valor Total</h2>
+                            <h2 class="fs-6 fw-normal mb-1 text-gray-900">Valor Total</h2>
                             <p class="fw-extrabold mb-1" style="font-size: 17pt;">
                                 {{ valorTotal | currency:'BRL':'symbol':'1.2-2' }}
                             </p>
@@ -130,7 +130,7 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h2 class="fs-5 fw-bold mb-0">Vendas Realizadas</h2>
+                                <h4 class="fs-5 fw-bold mb-0">VENDAS REALIZADAS</h4>
                             </div>
                             <div class="col text-end">
                                 <!-- <a href="./traffic-sources.html" class="btn btn-sm btn-primary">Ver Todas</a> -->
@@ -186,6 +186,8 @@
                                 }
                             </tbody>
                         </table>
+                        <br>
+                        
                         <nav aria-label="Page navigation">
                             <ul class="pagination">
                               <li class="page-item" [class.disabled]="current_page === 1">
