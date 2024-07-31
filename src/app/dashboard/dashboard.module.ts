@@ -18,6 +18,7 @@ import { LancamentoLimiteComponent } from './pages/cadastros/lancamento-limite/l
 
 import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
 import { NumberFormatBRPipe } from '../service/diretivas/numberFormatBR';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { NumberFormatBRPipe } from '../service/diretivas/numberFormatBR';
     UsuarioAdicionarComponent,
     UsuarioEditarComponent,
     LancamentoLimiteComponent, 
-    NumberFormatBRPipe
+    NumberFormatBRPipe, SidenavComponent
   ],
   imports: [
     CommonModule,

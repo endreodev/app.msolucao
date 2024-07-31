@@ -36,5 +36,8 @@ export class TravaService {
     return this.http.get<any[]>(`${environment.BASEURL}/trava/cancelar/${id}`);
   }
 
+  getTravaIntegracao(parceiro_id: string): Observable<any>{
+    return this.http.get(environment.BASEURL+"/trava/trava-integracao/"+parceiro_id);
+  }
 
 }

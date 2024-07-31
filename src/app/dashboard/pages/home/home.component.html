@@ -134,24 +134,26 @@
                             </div>
                             <div class="col text-end">
                                 <!-- <a href="./traffic-sources.html" class="btn btn-sm btn-primary">Ver Todas</a> -->
+                                <button class="btn btn-primary" (click)="sidenav.toggleSidenav($event)">Abrir Sidenav</button>
+                                <app-sidenav #sidenav></app-sidenav>
                             </div>
                         </div>
                     </div>
                     <div class="table-responsive p-3">
                         <table class="table align-items-center table-flush table table-striped" >
-                            <thead class="thead-light">
-                                <tr>
-                                    <th class="border-bottom" scope="col">ico</th>
-                                    <th class="border-bottom" scope="col">Id</th>
-                                    <th class="border-bottom" scope="col" *ngIf="interno">Parceiro</th>
-                                    <th class="border-bottom" scope="col">Usuario</th>
-                                    <th class="border-bottom" scope="col">Referencia</th>
-                                    <th class="border-bottom" scope="col">Data</th>
-                                    <th class="border-bottom" scope="col">Qtd</th>
-                                    <th class="border-bottom" scope="col">Valor (g)</th>
-                                    <th class="border-bottom" scope="col">Total</th>
-                                    <th class="border-bottom" scope="col">Status</th>
-                                    <th class="border-bottom" scope="col" *ngIf="interno" >Ação</th>
+                            <thead style="padding: 10px !important; margin-bottom: 5px !important; align-items: center !important;">
+                                <tr> 
+                                    <th class="fw-bolder text-gray-500">ico</th>
+                                    <th class="fw-bolder text-gray-500">Id</th>
+                                    <th class="fw-bolder text-gray-500" *ngIf="interno">Parceiro</th>
+                                    <th class="fw-bolder text-gray-500">Usuario</th>
+                                    <th class="fw-bolder text-gray-500">Referencia</th>
+                                    <th class="fw-bolder text-gray-500">Data</th>
+                                    <th class="fw-bolder text-gray-500">Qtd</th>
+                                    <th class="fw-bolder text-gray-500">Valor (g)</th>
+                                    <th class="fw-bolder text-gray-500">Total</th>
+                                    <th class="fw-bolder text-gray-500">Status</th>
+                                    <th class="fw-bolder text-gray-500" *ngIf="interno" >Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -174,12 +176,16 @@
                                         </button>
                                     </td>
                                     <td class="fw-bolder text-gray-500" *ngIf="interno">
-                                        <button *ngIf="iten.status == 'A'" class="btn btn-md bg-success mb-1 p-2" (click)="encerraOrderm(iten.id)">
+                                        <button *ngIf="iten.status == 'A'" class="btn btn-sm bg-success mb-1 p-2" (click)="encerraOrderm(iten.id)">
                                             Finalizar
                                         </button>
                                         &nbsp;
-                                        <button *ngIf="iten.status == 'A' && interno" class="btn btn-md bg-warning mb-1 p-2" (click)="cancelarOrderm(iten.id)">
+                                        <button *ngIf="iten.status == 'A'" class="btn btn-sm bg-warning mb-1 p-2" (click)="cancelarOrderm(iten.id)">
                                             Cancelar
+                                        </button>
+                                        &nbsp;
+                                        <button *ngIf="iten.status == 'F' && iten.integrado != 'S'" class="btn btn-sm btn-info mb-1 p-2" (click)="realizaIntegracao(iten.id)">
+                                            Integrar
                                         </button>
                                     </td>
                                 </tr>

@@ -17,6 +17,7 @@ export interface Travas {
     preco_unitario: number;
     preco_total: number; 
     status: string;      
+    integrado: string;
     created_at: string;  
     updated_at: string;  
 }

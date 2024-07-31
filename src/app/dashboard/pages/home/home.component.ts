@@ -267,6 +267,20 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
 
   }
 
+  realizaIntegracao(id: any){
+
+    this.travaService.getTravaIntegracao(id).subscribe( (response: any) =>{
+      if(response.error){
+        alert(response.message);
+        this.goToPage(this.current_page);
+      }else{
+        alert(response.message);
+        this.goToPage(this.current_page);
+      }
+    });
+    
+  }
+
 
 
   clearField() {
