@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { Qout } from './interface/qout';
 import { environment } from '../../../../environments/environment';
 import { ParceiroSharedService } from '../cadastros/parceiro/service/parceiro.shared.service';
-import { TravaService } from './service/trava.service'; 
+import { TravaService } from './service/trava.service';
 import { ActivatedRoute } from '@angular/router';
 import { Travas } from './interface/trava';
 import { ParceiroService } from '../cadastros/parceiro/service/parceiro.service';
@@ -17,10 +17,10 @@ declare var $: any;
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  limiteParceiro: number=0;
-  percentual:number=0;
+  limiteParceiro: number = 0;
+  percentual: number = 0;
 
   gramas?: any = 0;
   cotationPrice: number = 0;
@@ -30,14 +30,14 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
   eventSource?: EventSource;
   exibirProgressBar: boolean = true;
   stringTrava: string = "";
-  quantidadeTrava: number = 0; 
-  
-  current_page:number = 0;
-  paginas:number[] = [];
-  totalRegistros:number = 0;
+  quantidadeTrava: number = 0;
+
+  current_page: number = 0;
+  paginas: number[] = [];
+  totalRegistros: number = 0;
   travas: Travas[] = [];
 
-  interno:boolean = false;
+  interno: boolean = false;
 
   constructor(
     private travaService: TravaService,
@@ -50,12 +50,12 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
     this.interno = localStorage.getItem('interno') === "true"
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnInit(): void {
-    this.parceiroShare.currentParceiroID.subscribe( (id: string) => {
+    this.parceiroShare.currentParceiroID.subscribe((id: string) => {
       this.idParceiro = id;
-      if(this.idParceiro != ""){
+      if (this.idParceiro != "") {
         this.reconnectEventSource();
         this.atualizartabela();
         // this.buscarDadosParceiro();
@@ -64,19 +64,19 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
     })
   }
 
-  buscarDadosParceiro(){
-    if(this.isValid(this.idParceiro)){
-      this.httpParceiro.getId(this.idParceiro).subscribe( (responde: any) => {
+  buscarDadosParceiro() {
+    if (this.isValid(this.idParceiro)) {
+      this.httpParceiro.getId(this.idParceiro).subscribe((responde: any) => {
         this.limiteParceiro = responde.lmt_mes
-        this.percentual = ( this.quantidadeTrava/this.limiteParceiro ) ;
+        this.percentual = (this.quantidadeTrava / this.limiteParceiro);
       })
     }
   }
 
-  atualizartabela(page: any = 1){
-    if(this.interno){
+  atualizartabela(page: any = 1) {
+    if (this.interno) {
       this.atualizalistaTravasTodos(page);
-    }else{
+    } else {
       this.atualizalistaTravas(page);
     }
   }
@@ -87,7 +87,12 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    this.closeEventSource();   
+    this.closeEventSource();
+  }
+
+
+  trackByFn(index: number, item: any): number {
+    return item.id; // ou qualquer campo único
   }
 
   reconnectEventSource(): void {
@@ -102,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
         this.exibirProgressBar = true;
         const data: Qout = JSON.parse(event.data);
         this.cotationPrice = data.negociado || 0;
-        this.cotationReal  = data.valor_grama_real || 0;
+        this.cotationReal = data.valor_grama_real || 0;
       });
     };
 
@@ -119,64 +124,64 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
     }
   }
 
-  atualizalistaTravas(page: any = 1){
+  atualizalistaTravas(page: any = 1) {
 
-    this.travaService.getTrava(this.idParceiro, page ).subscribe( (response: any) =>{
+    this.travaService.getTrava(this.idParceiro, page).subscribe((response: any) => {
 
-      this.current_page   = response.current_page
-      this.paginas        = Array.from({ length: response.pages }, (_, i) => i + 1);
+      this.current_page = response.current_page
+      this.paginas = Array.from({ length: response.pages }, (_, i) => i + 1);
       this.totalRegistros = response.total
-      this.travas         = response.travas
+      this.travas = response.travas
 
-    },(error: any)=>{
-      this.current_page   = 0 ;
-      this.paginas        = [] ;
-      this.totalRegistros = 0 ;
+    }, (error: any) => {
+      this.current_page = 0;
+      this.paginas = [];
+      this.totalRegistros = 0;
       this.travas = [];
     });
 
-    this.travaService.getTravaMes(this.idParceiro).subscribe( (resp: any) =>{
-      this.stringTrava = " - "+resp.mes+"/"+resp.ano;
+    this.travaService.getTravaMes(this.idParceiro).subscribe((resp: any) => {
+      this.stringTrava = " - " + resp.mes + "/" + resp.ano;
       this.quantidadeTrava = resp.quantidade_vendas;
 
       this.buscarDadosParceiro()
-    }, (error: any)=>{
-      this.stringTrava      = "";
-      this.quantidadeTrava  = 0;
+    }, (error: any) => {
+      this.stringTrava = "";
+      this.quantidadeTrava = 0;
     });
 
-    
+
   }
 
 
-  atualizalistaTravasTodos(page: any = 1){
+  atualizalistaTravasTodos(page: any = 1) {
 
-    this.travaService.getTravaTodos(this.idParceiro, page ).subscribe( (response: any) =>{
+    this.travaService.getTravaTodos(this.idParceiro, page).subscribe((response: any) => {
 
-      this.current_page   = response.current_page
-      this.paginas        = Array.from({ length: response.pages }, (_, i) => i + 1);
+      this.current_page = response.current_page
+      this.paginas = Array.from({ length: response.pages }, (_, i) => i + 1);
       this.totalRegistros = response.total
-      this.travas         = response.travas
+      this.travas = response.travas
 
       this.buscarDadosParceiro()
-    },(error: any)=>{
-      this.current_page   = 0 ;
-      this.paginas        = [] ;
-      this.totalRegistros = 0 ;
+    }, (error: any) => {
+      this.current_page = 0;
+      this.paginas = [];
+      this.totalRegistros = 0;
       this.travas = [];
     });
 
-    this.travaService.getTravaMes(this.idParceiro).subscribe( (resp: any) =>{
-      this.stringTrava = " - "+resp.mes+"/"+resp.ano;
+    this.travaService.getTravaMes(this.idParceiro).subscribe((resp: any) => {
+      this.stringTrava = " - " + resp.mes + "/" + resp.ano;
       this.quantidadeTrava = resp.quantidade_vendas;
 
 
-    }, (error: any)=>{
-      this.stringTrava      = "";
-      this.quantidadeTrava  = 0;
+    }, (error: any) => {
+      this.stringTrava = "";
+      this.quantidadeTrava = 0;
     });
 
-    
+
   }
 
   get valorTotal(): number {
@@ -202,44 +207,44 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
   }
 
   // REALISA ORDEM DE VENDA 
-  realizarOrdemTrava(){
+  realizarOrdemTrava() {
 
     const requestBody = {
       empresa_id: 1,
-      parceiro_id: this.idParceiro, 
-      quantidade: this.gramas, 
-      preco_unitario: this.cotationPrice,  
+      parceiro_id: this.idParceiro,
+      quantidade: this.gramas,
+      preco_unitario: this.cotationPrice,
       preco_total: this.valorTotal,
       cotacao: this.cotationReal
     };
 
-    this.travaService.postTrava(requestBody).subscribe( (response: any)=>{
+    this.travaService.postTrava(requestBody).subscribe((response: any) => {
       // Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
       this.m.alertsucess(response.message);
       this.gramas = 0;
       this.atualizartabela(1);
-    }, (error: any)=>{
+    }, (error: any) => {
       // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
       this.m.alerterror(error.error.message);
-    });  
-    
+    });
+
   }
 
 
-  encerraOrderm(id: number){
-    this.travaService.getTravaEncerrar(id).subscribe( (response: any)=>{
+  encerraOrderm(id: number) {
+    this.travaService.getTravaEncerrar(id).subscribe((response: any) => {
       // Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
       this.m.alertsucess(response.message);
       this.gramas = 0;
       this.atualizartabela(1);
-    }, (error: any)=>{
+    }, (error: any) => {
       this.m.alerterror(error.error.message);
       // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
     });
   }
 
 
-  cancelarOrderm(id: number){
+  cancelarOrderm(id: number) {
 
     Swal.fire({
       title: 'Você tem certeza do cancelamento ?',
@@ -253,12 +258,12 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // this.encerraOrderm(id);
-        this.travaService.getTravaCancelar(id).subscribe( (response: any)=>{
+        this.travaService.getTravaCancelar(id).subscribe((response: any) => {
           // Swal.fire({position: "top-end", icon: 'success',title: 'Ordem de venda!',text: response.message,showConfirmButton: false,timer: 1500});
           this.m.alertsucess(response.message);
           this.gramas = 0;
           this.atualizartabela(1);
-        }, (error: any)=>{
+        }, (error: any) => {
           this.m.alerterror(error.error.message);
           // Swal.fire({position: "top-end", icon: 'error', title: 'Ordem de venda!', text: error.error.message, showConfirmButton: false,  timer: 1500});
         });
@@ -267,18 +272,18 @@ export class HomeComponent implements OnInit, OnDestroy , AfterViewInit {
 
   }
 
-  realizaIntegracao(id: any){
+  realizaIntegracao(id: any) {
 
-    this.travaService.getTravaIntegracao(id).subscribe( (response: any) =>{
-      if(response.error){
+    this.travaService.getTravaIntegracao(id).subscribe((response: any) => {
+      if (response.error) {
         alert(response.message);
         this.goToPage(this.current_page);
-      }else{
+      } else {
         alert(response.message);
         this.goToPage(this.current_page);
       }
     });
-    
+
   }
 
 

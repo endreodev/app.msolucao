@@ -21,3 +21,15 @@ export interface Travas {
     created_at: string;  
     updated_at: string;  
 }
+
+
+export interface Integracao {
+    
+    id: number;
+    id_trava: number;
+    codcontrole: number;
+    mensagem: string;
+    sucesso: string; 
+    created_at: string;
+    updated_at: string;
+}

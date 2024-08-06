@@ -12,17 +12,18 @@ export class SidenavComponent {
   fieldOne: string = '';
   fieldTwo: string = '';
   travaForm!: FormGroup;
+  dadosIntegracao: any;
 
   private listener!: () => void;
 
   constructor(private renderer: Renderer2, private el: ElementRef,private fb: FormBuilder,) {
     this.listener = this.renderer.listen('document', 'click', (event) => {
       if (!this.el.nativeElement.contains(event.target) && this.isOpen) {
-        this.toggleSidenav(null);
+        this.toggleSidenav(null, null);
       }
     });
     this.travaForm = this.fb.group({
-      empresa_id: new FormControl(''),
+      // empresa_id: new FormControl(''),
       produto_id: new FormControl('OURO'),
       parceiro_id: new FormControl(''),
       usuario_id: new FormControl(''),
@@ -30,18 +31,34 @@ export class SidenavComponent {
       preco_unitario: new FormControl(''),
       preco_total: new FormControl(''),
       cotacao: new FormControl(''),
-      desagio: new FormControl(''),
+      // desagio: new FormControl(''),
       ativo: new FormControl(true),
       status: new FormControl('A'),
       // Campos de integração
       codcontrole: new FormControl(''),
-      sucesso: new FormControl(false),
+      sucesso: new FormControl(''),
       mensagem: new FormControl('')
     });
   }
 
-  toggleSidenav(event: any) {
+  toggleSidenav(event: any, iten: any) {
     if(event != null){
+
+      this.travaForm.patchValue({
+        produto_id: 'OURO',
+        parceiro_id: iten.parceiro_id,
+        usuario_id:  iten.usuario_nome,
+        quantidade:  iten.quantidade,
+        preco_unitario: iten.preco_unitario,
+        preco_total:    iten.preco_total,
+        cotacao:        iten.preco_unitario,
+        ativo: "Ativo",
+        status: iten.status ? 'Integrado' : 'Pendente',
+        // Campos de integração
+        codcontrole: iten.integracao.codcontrole,
+        sucesso: iten.integracao.sucesso ? 'Integrado' : 'Pendente',
+        mensagem: iten.integracao.mensagem
+      })
       event.stopPropagation();  // Isso impede que o evento de clique se propague
     }
 
