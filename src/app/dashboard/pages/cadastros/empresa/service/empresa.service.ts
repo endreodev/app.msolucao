@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'; 
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../../environments/environment';
-import { Trava } from '../../../home/interface/trava';
 import { Empresa } from '../interface/empresa';
 
 @Injectable({
@@ -27,6 +26,10 @@ export class EmpresaService {
 
   update(id: string , body: any): Observable<any[]> {
     return this.http.put<any[]>( environment.BASEURL+"/empresas/"+id , body );
+  }
+
+  imagem(formData: any): Observable<any[]> {
+    return this.http.post<any[]>( environment.BASEURL+"/upload_logo" , formData );
   }
 
 }

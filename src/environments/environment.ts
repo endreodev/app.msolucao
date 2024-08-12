@@ -9,7 +9,8 @@ const localIP = IpService
 
 export const environment = {
   production: true,
-  BASEURL: `http://104.234.200.32:5000`
+  // BASEURL: `http://104.234.200.32:5000`
+  BASEURL: `https://goldbeam.com.br:5000`
 };
 
 /*

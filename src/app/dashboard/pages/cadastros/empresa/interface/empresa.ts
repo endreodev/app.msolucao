@@ -9,5 +9,7 @@ export interface Empresa {
     hrinicio: string;
     tokenbot: string;
     telegran: string;
+    integra_skn: boolean;  
+    integra_gar: boolean;  
     ativo: boolean;     
   }

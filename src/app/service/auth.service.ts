@@ -46,6 +46,9 @@ export class AuthService {
 
       let token = '';
       let expira: any  =  Math.floor(Date.now()+((24*60*60)*1000) /1000);
+
+      // Limpa todo o localStorage
+      localStorage.clear();
       
       localStorage.setItem("access_token", response.access_token )
       localStorage.setItem("ativo", response.ativo )
@@ -57,13 +60,15 @@ export class AuthService {
       localStorage.setItem("user_id", response.user_id )
       localStorage.setItem("empresa_id", response.empresa_id )
       localStorage.setItem("expires", response.expires )
+      localStorage.setItem("logomarca", response.logomarca )
       localStorage.setItem("exp" , expira.toString() )
       token = response.access_token ?? '';
 
       this.m.alertsucess('Acesso realizado com sucesso!');
 
       if (token != '') {
-        this.updateLoggedIn(true)
+        this.postToken();
+        this.updateLoggedIn(true);
         this.router.navigate(['/dashboard']);
       }
 
@@ -71,6 +76,20 @@ export class AuthService {
       this.m.alerterror(error.error.message);
     });
 
+  }
+
+  postToken(){
+
+      var jsonData = {
+          "empresa_id": localStorage.getItem('empresa_id'),
+          "usuario_id": localStorage.getItem('user_id'),
+          "token": localStorage.getItem('firebase_token'),
+          "interno": localStorage.getItem("interno") === "true"
+      }
+
+      this.http.post(`${environment.BASEURL}/firebase`, jsonData ).subscribe( (response:any)=>{
+        console.log(response);
+      })
   }
 
   logout(): void {

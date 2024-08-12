@@ -13,6 +13,7 @@ export class SidenavComponent {
   fieldTwo: string = '';
   travaForm!: FormGroup;
   dadosIntegracao: any;
+  logoMarca:string = '';
 
   private listener!: () => void;
 
@@ -75,4 +76,6 @@ export class SidenavComponent {
     console.log(this.travaForm.value);
     // Adicione aqui a lógica para enviar os dados para a API
   }
+
+
 }

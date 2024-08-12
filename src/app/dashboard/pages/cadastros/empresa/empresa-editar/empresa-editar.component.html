@@ -15,11 +15,21 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="col-sm-12 mt-5 p-1 text-left" style="margin: 20px;">
+                        <!-- Foto de Perfil -->
+                        <img [src]="logoMarca" alt="Foto de Perfil" class="img-fluid profile-picture-new" (click)="openUploadModal()">
+                    </div>
                     <div class="col-sm-12 mt-5 p-3">
                         <form (ngSubmit)="onSubmit()" [formGroup]="empresaForm">
                           <div class="row">
 
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                  <label for="nome" class="form-label">Codigo Interno</label>
+                                  <input type="text" class="form-control" id="cod_interno" formControlName="cod_interno" placeholder="Digite codigo interno">
+                                </div>
+                            </div>
+                              
                             <div class="col-sm-12 col-md-3">
                               <div class="mb-3">
                                 <label for="cnpj" class="form-label">CNPJ</label>
@@ -119,6 +129,33 @@
                                     </select>
                                     <div *ngIf="empresaForm.get('ativo')?.invalid && empresaForm.get('ativo')?.touched">
                                         <div class="text-danger" *ngIf="empresaForm.get('ativo')?.hasError('required')">Ativo é obrigatório.</div> 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="nome" class="form-label">Integração Sankhya</label>
+                                    <select class="form-select" aria-label="Default select example"  id="integra_skn" formControlName="integra_skn" >
+                                        <option value="true">Ativo</option>
+                                        <option value="false">Inativo</option>
+                                    </select>
+                                    <div *ngIf="empresaForm.get('integra_skn')?.invalid && empresaForm.get('integra_skn')?.touched">
+                                        <div class="text-danger" *ngIf="empresaForm.get('integra_skn')?.hasError('required')">Integração skn é obrigatório.</div> 
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                    <label for="nome" class="form-label">Integração Garnet</label>
+                                    <select class="form-select" aria-label="Default select example"  id="integra_gar" formControlName="integra_gar" >
+                                        <option value="true">Ativo</option>
+                                        <option value="false">Inativo</option>
+                                    </select>
+                                    <div *ngIf="empresaForm.get('integra_gar')?.invalid && empresaForm.get('integra_gar')?.touched">
+                                        <div class="text-danger" *ngIf="empresaForm.get('integra_gar')?.hasError('required')">Integração garnet é obrigatório.</div> 
                                     </div>
                                 </div>
                             </div>

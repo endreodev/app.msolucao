@@ -8,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   interno:any  = false;
+  logoMarca:string = "";
 
   constructor(){ }
 
   ngOnInit(): void { 
     this.interno = localStorage.getItem('interno') === 'true';
+    this.logoMarca =  localStorage.getItem("logomarca") ?? "";
   }
 }

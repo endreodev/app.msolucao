@@ -3,13 +3,10 @@ import { Usuario } from '../interface/usuario';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Grupos } from '../../../../../interfaces/grupos';
-import { AlertService } from '../../../../../service/alert.component';
-import { GrupoService } from '../../../../../service/grupo.service';
-import { PlanoService } from '../../../../../service/plano.service';
+import { AlertService } from '../../../../../service/alert.component'; 
 import { ParceiroService } from '../../parceiro/service/parceiro.service';
 import { UsuarioService } from '../service/usuario.service';
-import { Parceiro } from '../../parceiro/interface/parceiro';
-import { AuthService } from '../../../../../service/auth.service';
+import { Parceiro } from '../../parceiro/interface/parceiro'; 
 import { AcessoService } from '../../../../../service/acessos.service';
 import { catchError, of } from 'rxjs';
 

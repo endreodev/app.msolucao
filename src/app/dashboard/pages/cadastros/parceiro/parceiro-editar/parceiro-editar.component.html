@@ -20,6 +20,14 @@
                         <form (ngSubmit)="onSubmit()" [formGroup]="parceiroForm">
                           <div class="row">
 
+                            
+                            <div class="col-sm-12 col-md-3">
+                                <div class="mb-3">
+                                  <label for="cnpj" class="form-label">Codigo Interno</label>
+                                  <input type="text" class="form-control" id="cod_interno" formControlName="cod_interno" placeholder="Digite o Cod Interno" maxlength="14">
+                                </div>
+                              </div>
+
                             <div class="col-sm-12 col-md-3">
                               <div class="mb-3">
                                 <label for="cnpj" class="form-label">CNPJ</label>

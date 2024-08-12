@@ -30,25 +30,12 @@ export class FirebaseMessagingService {
         (token:any) => { 
           console.log(token); 
           token = token ?? "";
-          this.postToken(token);
+          // this.postToken(token);
+          localStorage.setItem('firebase_token', token )
           
         },
         (error) => { console.error(error); },
       );
-  }
-
-  postToken(token:string){
-
-      var jsonData = {
-          "empresa_id": localStorage.getItem('empresa_id'),
-          "usuario_id": localStorage.getItem('user_id'),
-          "token": token,
-          "interno": localStorage.getItem("interno") === "true"
-      }
-
-      this.http.post(`${environment.BASEURL}/firebase`, jsonData ).subscribe( (response:any)=>{
-        console.log(response);
-      })
   }
 
   receiveMessage() {
