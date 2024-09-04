@@ -61,6 +61,7 @@ export class AuthService {
       localStorage.setItem("empresa_id", response.empresa_id )
       localStorage.setItem("expires", response.expires )
       localStorage.setItem("logomarca", response.logomarca )
+      localStorage.setItem("integracao_sankhya", response.integracao_sankhya )
       localStorage.setItem("exp" , expira.toString() )
       token = response.access_token ?? '';
 

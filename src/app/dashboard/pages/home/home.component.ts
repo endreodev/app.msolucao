@@ -32,13 +32,16 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   exibirProgressBar: boolean = true;
   stringTrava: string = "";
   quantidadeTrava: number = 0;
-
+  integracao_sankhya = localStorage.getItem("integracao_sankhya");
   current_page: number = 0;
   paginas: number[] = [];
   totalRegistros: number = 0;
   travas: Travas[] = [];
 
   interno: boolean = false;
+
+  dataInicio: string = "";
+  dataFim: string = "";
 
   constructor(
     private travaService: TravaService,
@@ -155,10 +158,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
+  filtrarPorData() {
+    // Lógica para filtrar os dados com base nas datas de início e fim
+  }
 
   atualizalistaTravasTodos(page: any = 1) {
 
-    this.travaService.getTravaTodos(this.idParceiro, page).subscribe((response: any) => {
+    this.travaService.getTravaTodos(this.idParceiro, page,this.dataInicio, this.dataFim).subscribe((response: any) => {
 
       this.current_page = response.current_page
       this.paginas = Array.from({ length: response.pages }, (_, i) => i + 1);
@@ -182,8 +188,32 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.stringTrava = "";
       this.quantidadeTrava = 0;
     });
+  }
 
+  atualizalistaTravasTodosFiltro(page: any = 1) {
 
+    this.travaService.getTravaTodos(this.idParceiro, page,this.dataInicio, this.dataFim).subscribe((response: any) => {
+
+      this.current_page = response.current_page
+      this.paginas = Array.from({ length: response.pages }, (_, i) => i + 1);
+      this.totalRegistros = response.total
+      this.travas = response.travas
+
+      this.buscarDadosParceiro()
+    }, (error: any) => {
+      this.current_page = 0;
+      this.paginas = [];
+      this.totalRegistros = 0;
+      this.travas = [];
+    });
+
+    this.travaService.getTravaMes(this.idParceiro).subscribe((resp: any) => {
+      this.stringTrava = " - " + resp.mes + "/" + resp.ano;
+      this.quantidadeTrava = resp.quantidade_vendas;
+    }, (error: any) => {
+      this.stringTrava = "";
+      this.quantidadeTrava = 0;
+    });
   }
 
   get valorTotal(): number {
@@ -289,10 +319,55 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
+  baixarRelatorioPDF() {
+    this.travaService.getTravaRelatorio(1,this.dataInicio, this.dataFim).subscribe((data: Blob) => {
+      const downloadURL = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = 'relatorio_travas.pdf';
+      link.click();
+    });
+  }
 
+  baixarRelatorioExecel() {
+    this.travaService.getTravaRelatorioExecel(1,this.dataInicio, this.dataFim).subscribe((data: Blob) => {
+      const downloadURL = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = downloadURL;
+      link.download = 'relatorio_travas.xlsx';
+      link.click();
+    });
+  }
 
+  
   clearField() {
     this.gramas = null; // ou "" se você estiver usando string
   }
+
+
+  get paginatedPages(): number[] {
+    const totalPages = this.paginas.length;
+    const visiblePages = 12;
+    const pages: number[] = [];
+
+    if (totalPages <= visiblePages) {
+        return this.paginas;
+    }
+
+    const startPage = Math.max(1, this.current_page - Math.floor(visiblePages / 2));
+    const endPage = Math.min(totalPages, startPage + visiblePages - 1);
+
+    for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+    }
+
+    if (endPage < totalPages - 1) {
+        pages.push(-1); // Indicador de "..."
+    }
+
+    pages.push(totalPages - 1, totalPages); // Duas últimas páginas
+
+    return pages;
+}
 
 }

@@ -23,7 +23,7 @@ import { ambiente, environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging'; 
 import { IConfig, provideEnvironmentNgxMask } from 'ngx-mask'
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask'; 
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 registerLocaleData(pt);
 

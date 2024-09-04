@@ -15,8 +15,28 @@ export class TravaService {
     return this.http.get<any[]>(environment.BASEURL+"/trava/parceiro/"+parceiro_id+"?page="+page+"&per_page=5");
   }
 
-  getTravaTodos(parceiro_id: string , page: any): Observable<any[]> {
-    return this.http.get<any[]>(environment.BASEURL+"/trava?page="+page+"&per_page=5");
+  getTravaTodos(parceiro_id: string , page: any, data_inicial: any, data_final: any): Observable<any[]> {
+    var filtro: string = "";
+    if( data_inicial && data_final ){
+      filtro = "&data_inicial="+data_inicial+"&data_final="+data_final;
+    }
+    return this.http.get<any[]>(environment.BASEURL+"/trava?page="+page+"&per_page=5"+filtro);
+  }
+
+  getTravaRelatorio( page: any, data_inicial: any, data_final: any): Observable<Blob> {
+    var filtro: string = "";
+    if( data_inicial && data_final ){
+      filtro = "&data_inicial="+data_inicial+"&data_final="+data_final;
+    }
+    return this.http.get(environment.BASEURL+"/trava/relatorio?page="+page+"&per_page=1000"+filtro, { responseType: 'blob' });
+  }
+
+  getTravaRelatorioExecel( page: any, data_inicial: any, data_final: any): Observable<Blob> {
+    var filtro: string = "";
+    if( data_inicial && data_final ){
+      filtro = "&data_inicial="+data_inicial+"&data_final="+data_final;
+    }
+    return this.http.get(environment.BASEURL+"/trava/relatorio_excel?page="+page+"&per_page=1000"+filtro, { responseType: 'blob' });
   }
 
   getTravaMes(parceiro_id: string): Observable<any>{

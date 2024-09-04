@@ -134,6 +134,17 @@
                             <div class="col text-end">
                                 <app-sidenav #sidenav></app-sidenav>
                             </div>
+                            <div class="col text-end">
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <input type="date" class="form-control me-2" [(ngModel)]="dataInicio" placeholder="Data Inicial">
+                                    <input type="date" class="form-control me-2" [(ngModel)]="dataFim" placeholder="Data Final">
+                                    <button class="btn btn-primary me-2" (click)="atualizalistaTravasTodos()">Filtrar</button>
+                                    <button *ngIf="dataInicio && dataFim"
+                                        class="btn btn-danger me-2" (click)="baixarRelatorioPDF()"><i class="fas fa-file-pdf"></i></button>
+                                    <button *ngIf="dataInicio && dataFim"
+                                        class="btn btn-success me-2" (click)="baixarRelatorioExecel()"><i class="fas fa-file-pdf"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="table-responsive p-3">
@@ -150,7 +161,7 @@
                                     <th class="fw-bolder text-gray-500">Valor (g)</th>
                                     <th class="fw-bolder text-gray-500">Total</th>
                                     <th class="fw-bolder text-gray-500">Status</th>
-                                    <th class="fw-bolder text-gray-500" *ngIf="interno" >Ação</th>
+                                    <th class="fw-bolder text-gray-500" *ngIf="interno">Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -180,27 +191,31 @@
                                             Cancelar
                                         </button>
                                         &nbsp;
-                                        <button *ngIf="iten.status == 'F' && iten.integrado != 'S'" class="btn btn-sm btn-info mb-1 p-2" (click)="realizaIntegracao(iten.id)">
+                                        <button 
+                                            *ngIf="iten.status == 'F' && iten.integrado != 'S' && integracao_sankhya" 
+                                            class="btn btn-sm btn-info mb-1 p-2" (click)="realizaIntegracao(iten.id)">
                                             Integrar
                                         </button>
+        
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <br>
-                        <nav aria-label="Page navigation">
+                            <nav aria-label="Page navigation">
                             <ul class="pagination">
-                              <li class="page-item" [class.disabled]="current_page === 1">
-                                <a class="page-link" (click)="previousPage()">Anterior</a>
-                              </li>
-                              <li *ngFor="let page of paginas" class="page-item" [class.active]="current_page === page">
-                                <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
-                              </li>
-                              <li class="page-item" [class.disabled]="current_page === paginas.length">
-                                <a class="page-link" (click)="nextPage()">Próximo</a>
-                              </li>
+                                <li class="page-item" [class.disabled]="current_page === 1">
+                                    <a class="page-link" (click)="previousPage()">Anterior</a>
+                                </li>
+                                <li *ngFor="let page of paginatedPages" class="page-item" [class.active]="current_page === page">
+                                    <a *ngIf="page !== -1" class="page-link" (click)="goToPage(page)">{{ page }}</a>
+                                    <span *ngIf="page === -1" class="page-link">...</span>
+                                </li>
+                                <li class="page-item" [class.disabled]="current_page === paginas.length">
+                                    <a class="page-link" (click)="nextPage()">Próximo</a>
+                                </li>
                             </ul>
-                          </nav>
+                        </nav>
                     </div>
                 </div>
             </div>
