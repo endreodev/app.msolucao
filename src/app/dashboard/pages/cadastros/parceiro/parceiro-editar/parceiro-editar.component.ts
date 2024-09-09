@@ -37,7 +37,7 @@ export class ParceiroEditarComponent {
       empresa_id: new FormControl(''),
       cgc: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(18)]),
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      plano: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      plano: new FormControl('', [Validators.required, Validators.minLength(4)]),
       lmt_trava: new FormControl(''),
       lmt_mes: new FormControl(''),
       grupo_id: new FormControl(''),
