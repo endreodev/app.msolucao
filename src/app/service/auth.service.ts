@@ -40,6 +40,26 @@ export class AuthService {
       });
   }
 
+  updatePasswordUser(user_id: any, newPassword: string){
+    this.http.post(`${environment.BASEURL}/change-password-user`, { user_id: user_id, new_password: newPassword })
+      .subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Senha Atualizada',
+            text: 'Sua senha foi atualizada com sucesso!'
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Não foi possível atualizar a senha. Por favor, tente novamente.'
+          });
+        }
+      });
+  }
+
   login(body: any) {
 
     this.http.post<any>(`${environment.BASEURL}/login`, body).subscribe((response: any) => {

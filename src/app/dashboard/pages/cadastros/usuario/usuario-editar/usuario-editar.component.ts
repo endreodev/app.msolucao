@@ -9,6 +9,8 @@ import { UsuarioService } from '../service/usuario.service';
 import { Parceiro } from '../../parceiro/interface/parceiro'; 
 import { AcessoService } from '../../../../../service/acessos.service';
 import { catchError, of } from 'rxjs';
+import Swal from 'sweetalert2';
+import { AuthService } from '../../../../../service/auth.service';
 
 @Component({
   selector: 'app-usuario-editar',
@@ -31,6 +33,7 @@ export class UsuarioEditarComponent {
     private httpUsuario: UsuarioService,
     private httpParceiro: ParceiroService,
     private httpAcesso: AcessoService,
+    private auth: AuthService,
     private m: AlertService
   ) {
     this.usuarioForm = this.fb.group({
@@ -120,6 +123,25 @@ export class UsuarioEditarComponent {
       }
     });
 
+  }
+
+  
+  changePasswordUser() {
+
+    // Solicitar a nova senha
+    Swal.fire({
+      title: 'Nova Senha',
+      input: 'password',
+      inputLabel: 'Digite sua nova senha',
+      inputPlaceholder: 'Nova senha',
+      confirmButtonText: 'Atualizar',
+      showCancelButton: true
+    }).then((newResult) => {
+      if (newResult.isConfirmed) {
+        const newPassword = newResult.value;
+        this.auth.updatePasswordUser(this.id, newPassword);
+      }
+    });
   }
 
 }
